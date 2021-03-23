@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateJobDto } from './dto/create-job.dto';
 import { JobApplication } from './interfaces/job.interface';
 import { JobsService } from './jobs.service';
@@ -9,12 +9,21 @@ export class JobsController {
 
   @Post()
   async create(@Body() createJobDto: CreateJobDto) {
-    console.log(this.jobsService);
-    this.jobsService.create(createJobDto);
+    this.jobsService.createJob(createJobDto);
   }
 
   @Get()
   async findAll(): Promise<JobApplication[]> {
     return this.jobsService.findAll();
+  }
+
+  @Get(':id')
+  async findJobById(@Param('id') id: string): Promise<JobApplication> {
+    return this.jobsService.findOne(id);
+  }
+
+  @Delete(':id')
+  async deleteJob(@Param('id') id: string) {
+    this.jobsService.delete(id);
   }
 }

@@ -1,15 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { JobApplication } from './interfaces/job.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateJobDto } from './dto/create-job.dto';
+import { JobApplication } from './jobs.entity';
 
 @Injectable()
 export class JobsService {
-  private readonly jobs: JobApplication[] = [];
+  constructor(
+    @InjectRepository(JobApplication)
+    private jobsRepository: Repository<JobApplication>,
+  ) {}
 
-  create(job: JobApplication) {
-    this.jobs.push(job);
+  async createJob(job: CreateJobDto) {
+    const newJob = await this.jobsRepository.create(job);
+    await this.jobsRepository.save(newJob);
+    return newJob;
   }
 
-  findAll(): JobApplication[] {
-    return this.jobs;
+  findAll(): Promise<JobApplication[]> {
+    return this.jobsRepository.find();
+  }
+
+  findOne(id: string): Promise<JobApplication> {
+    return this.jobsRepository.findOne(id);
+  }
+
+  delete(id: string) {
+    this.jobsRepository.delete(id);
   }
 }
