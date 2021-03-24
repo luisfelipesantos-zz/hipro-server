@@ -11,15 +11,19 @@ dotenv.config();
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.POSTGRES_HOST,
-      port: parseInt(process.env.POSTGRES_PORT),
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB,
-      entities: [JobApplication, User],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        type: 'postgres',
+        host: process.env.POSTGRES_HOST,
+        port: parseInt(process.env.POSTGRES_PORT),
+        username: process.env.POSTGRES_USER,
+        password: process.env.POSTGRES_PASSWORD,
+        database: process.env.POSTGRES_DB,
+        entities: [JobApplication, User],
+        migrations: ['migrations/*{.ts,.js}'],
+        migrationsRun: true,
+        synchronize: false,
+      }),
     }),
     JobsModule,
     UsersModule,

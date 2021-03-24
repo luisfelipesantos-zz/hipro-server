@@ -1,5 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './interfaces/user.interface';
 import { UserService } from './users.service';
 
@@ -10,7 +19,7 @@ export class UserController {
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     console.log(createUserDto);
-    this.userService.createUser(createUserDto);
+    return this.userService.createUser(createUserDto);
   }
 
   @Get()
@@ -23,8 +32,16 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
+  @Put(':id')
+  async updateUser(
+    @Param('id') id: string,
+    @Body() updatedUser: UpdateUserDto,
+  ) {
+    return this.userService.update(id, updatedUser);
+  }
+
   @Delete(':id')
   async deleteUser(@Param('id') id: string) {
-    this.userService.delete(id);
+    return this.userService.delete(id);
   }
 }

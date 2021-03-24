@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateJobDto } from './dto/create-job.dto';
+import { updatedJobDto } from './dto/update-job.dto';
 import { JobApplication } from './jobs.entity';
 
 @Injectable()
@@ -25,7 +26,11 @@ export class JobsService {
     return this.jobsRepository.findOne(id);
   }
 
+  update(id: string, updatedJob: updatedJobDto) {
+    return this.jobsRepository.update(id, updatedJob);
+  }
+
   delete(id: string) {
-    this.jobsRepository.delete(id);
+    return this.jobsRepository.delete(id);
   }
 }
