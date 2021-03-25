@@ -13,6 +13,12 @@ export const config: TypeOrmModuleOptions = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   entities: [JobApplication, User],
-  migrations: ['src/migrations/*{.ts,.js}'],
+  synchronize: false,
   migrationsRun: true,
+  logging: true,
+  logger: 'simple-console',
+  migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
+  cli: {
+    migrationsDir: 'src/migrations',
+  },
 };

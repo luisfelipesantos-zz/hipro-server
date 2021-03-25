@@ -2,6 +2,7 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class JobApplication1616618700807 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
     await queryRunner.createTable(
       new Table({
         name: 'JobApplication',
@@ -15,17 +16,17 @@ export class JobApplication1616618700807 implements MigrationInterface {
           },
           {
             name: 'company',
-            type: 'string',
+            type: 'character varying',
             isNullable: false,
           },
           {
             name: 'role',
-            type: 'string',
+            type: 'character varying',
             isNullable: false,
           },
           {
             name: 'status',
-            type: 'string',
+            type: 'character varying',
             isNullable: false,
           },
         ],

@@ -13,9 +13,10 @@ export class JobsService {
   ) {}
 
   async createJob(job: CreateJobDto) {
-    const newJob = await this.jobsRepository.create(job);
-    await this.jobsRepository.save(newJob);
-    return newJob;
+    const newJob = this.jobsRepository.create(job);
+    const jobData = await this.jobsRepository.save(newJob);
+    console.log(jobData);
+    return jobData;
   }
 
   findAll(): Promise<JobApplication[]> {
