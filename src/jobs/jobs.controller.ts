@@ -6,12 +6,15 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from 'src/users/users.guard';
 import { CreateJobDto } from './dto/create-job.dto';
 import { updatedJobDto } from './dto/update-job.dto';
 import { JobApplication } from './interfaces/job.interface';
 import { JobsService } from './jobs.service';
 
+@UseGuards(AuthGuard)
 @Controller('jobs')
 export class JobsController {
   constructor(private jobsService: JobsService) {}
