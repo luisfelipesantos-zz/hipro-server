@@ -21,11 +21,6 @@ export class User1616616480646 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'password',
-            type: 'character varying',
-            isNullable: false,
-          },
-          {
             name: 'name',
             type: 'character varying',
             isNullable: false,

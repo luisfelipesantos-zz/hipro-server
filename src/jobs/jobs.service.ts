@@ -13,8 +13,7 @@ export class JobsService {
   ) {}
 
   async createJob(job: CreateJobDto) {
-    const newJob = this.jobsRepository.create(job);
-    const jobData = await this.jobsRepository.save(newJob);
+    const jobData = await this.jobsRepository.insert(job);
     console.log(jobData);
     return jobData;
   }

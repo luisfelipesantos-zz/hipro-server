@@ -3,39 +3,41 @@ import {
   IsDefined,
   IsEmail,
   IsNotEmpty,
+  IsOptional,
   IsPhoneNumber,
   IsString,
   IsUUID,
 } from 'class-validator';
 
-export class CreateUserDto {
+export class UserSyncDto {
+  @IsOptional()
   @IsDefined()
   @IsNotEmpty()
   @IsUUID()
-  subid: string;
+  subid?: string;
 
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   @IsPhoneNumber('BR')
-  phone: string;
+  phone?: string;
 
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   @IsString()
-  name: string;
+  name?: string;
 
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email?: string;
 
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   @IsString()
-  gender: string;
+  gender?: string;
 
-  @IsDefined()
+  @IsOptional()
   @IsNotEmpty()
   @IsDateString()
-  birthDate: string;
+  birthDate?: string;
 }

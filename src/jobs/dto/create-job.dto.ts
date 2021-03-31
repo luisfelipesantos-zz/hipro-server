@@ -15,4 +15,9 @@ export class CreateJobDto {
   @IsDefined()
   @IsString()
   status: string;
+
+  @IsNotEmpty()
+  @IsDefined()
+  @IsString()
+  userId: string;
 }

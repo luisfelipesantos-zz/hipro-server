@@ -23,7 +23,7 @@ dotenv.config();
         synchronize: false,
         migrationsRun: true,
         logging: true,
-        logger: 'file',
+        logger: 'simple-console',
         migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
         cli: {
           migrationsDir: 'src/migrations',

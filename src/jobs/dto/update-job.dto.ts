@@ -27,4 +27,9 @@ export class updatedJobDto {
   @IsNotEmpty()
   @IsString()
   status?: string;
+
+  @IsOptional()
+  @IsNotEmpty()
+  @IsString()
+  userId?: string;
 }

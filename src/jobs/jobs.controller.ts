@@ -21,6 +21,7 @@ export class JobsController {
 
   @Post()
   async create(@Body() createJobDto: CreateJobDto) {
+    console.log(createJobDto);
     return this.jobsService.createJob(createJobDto);
   }
 

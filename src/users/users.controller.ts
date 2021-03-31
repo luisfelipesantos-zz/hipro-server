@@ -6,10 +6,12 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserSyncDto } from './dto/user-sync.dto';
 import { User } from './interfaces/user.interface';
 import { AuthGuard } from './users.guard';
 import { UserService } from './users.service';
@@ -22,6 +24,12 @@ export class UserController {
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
+  }
+
+  @Get('/userSync')
+  async userSync(@Query() userSyncDto: UserSyncDto) {
+    console.log(userSyncDto);
+    return this.userService.userSync(userSyncDto);
   }
 
   @Get()

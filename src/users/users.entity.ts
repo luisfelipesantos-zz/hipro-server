@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { JobApplication } from 'src/jobs/jobs.entity';
+import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity('User')
 export class User {
@@ -7,9 +8,6 @@ export class User {
 
   @Column()
   phone: string;
-
-  @Column()
-  password: string;
 
   @Column()
   name: string;
@@ -22,4 +20,7 @@ export class User {
 
   @Column()
   birthDate: string;
+
+  @OneToMany(() => JobApplication, (job) => job.user)
+  jobs: JobApplication[];
 }
